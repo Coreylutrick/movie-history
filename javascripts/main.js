@@ -1,1 +1,3 @@
-console.log('poop');
+const buttons = require('./events');
+
+buttons();
