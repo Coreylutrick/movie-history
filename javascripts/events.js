@@ -1,3 +1,5 @@
+const tmdb = require('./tmdb');
+
 const myLinks = () =>
 {
   $(document).click((e) =>
@@ -23,4 +25,18 @@ const myLinks = () =>
   });
 };
 
-module.exports = myLinks;
+const pressEnter = () =>
+{
+  tmdb.showResults();
+};
+
+const initializer = () =>
+{
+  myLinks();
+  pressEnter();
+};
+
+module.exports =
+{
+  initializer,
+};

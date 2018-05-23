@@ -1,3 +1,3 @@
 const buttons = require('./events');
 
-buttons();
+buttons.initializer();
