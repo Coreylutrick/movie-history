@@ -1,4 +1,5 @@
 const tmdb = require('./tmdb');
+const firebaseAPI = require('./firebaseAPI');
 
 const apiKeys = () =>
 {
@@ -22,6 +23,8 @@ const retrieveKeys = () =>
     .then((results) =>
     {
       tmdb.setKey(results.tmdb.apiKey);
+      firebaseAPI.setConfig(results.firebase);
+      firebase.initializeApp(results.firebase);
     })
     .catch((err) =>
     {
