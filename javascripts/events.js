@@ -1,6 +1,7 @@
 /*  eslint camelcase: 0 */
 const tmdb = require('./tmdb');
 const firebaseAPI = require('./firebaseAPI');
+const dom = require('./dom');
 
 const myLinks = () =>
 {
@@ -17,6 +18,7 @@ const myLinks = () =>
       $('#myMovies').removeClass('hide');
       $('#search').addClass('hide');
       $('#authScreen').addClass('hide');
+      getAllMoviesEvent();
     }
     else if (e.target.id === 'srch')
     {
@@ -62,6 +64,19 @@ const saveMovieToWishListEvent = () =>
         console.error('error in saving movie', err);
       });
   });
+};
+
+const getAllMoviesEvent = () =>
+{
+  firebaseAPI.getAllMovies()
+    .then((moviesArr) =>
+    {
+      dom.domString(moviesArr, tmdb.getImageConfig(), 'savedMovies', true);
+    })
+    .catch((err) =>
+    {
+      console.error(err);
+    });
 };
 
 const initializer = () =>
