@@ -1,6 +1,7 @@
 /*  eslint camelcase: 0 */
 const tmdb = require('./tmdb');
 const firebaseAPI = require('./firebaseAPI');
+const dom = require('./dom');
 
 const myLinks = () =>
 {
@@ -70,10 +71,7 @@ const getAllMoviesEvent = () =>
   firebaseAPI.getAllMovies()
     .then((moviesArr) =>
     {
-      moviesArr.forEach((movie) =>
-      {
-        $('#savedMovies').append(movie.title);
-      });
+      dom.domString(moviesArr, tmdb.getImageConfig(), 'savedMovies', true);
     })
     .catch((err) =>
     {
