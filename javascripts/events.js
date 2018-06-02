@@ -79,6 +79,32 @@ const getAllMoviesEvent = () =>
     });
 };
 
+const getWatchedMoviesEvent = () =>
+{
+  firebaseAPI.getWatchedMovies()
+    .then((moviesArr) =>
+    {
+      dom.domString(moviesArr, tmdb.getImageConfig(), 'savedMovies', true);
+    })
+    .catch((err) =>
+    {
+      console.error(err);
+    });
+};
+
+const getWishlistMoviesEvent = () =>
+{
+  firebaseAPI.getWishlistMovies()
+    .then((moviesArr) =>
+    {
+      dom.domString(moviesArr, tmdb.getImageConfig(), 'savedMovies', true);
+    })
+    .catch((err) =>
+    {
+      console.error(err);
+    });
+};
+
 const deleteMovieFromFirebase = () =>
 {
   $(document).on('click', '.deleteMovieFromCollectionEvent', ((e) =>
@@ -123,6 +149,24 @@ const updateMovieEvent = () =>
   });
 };
 
+const filterEvents = () =>
+{
+  $('#filterButtons').on('click', (e) =>
+  {
+    const classList = e.target.classList;
+    if (classList.contains('wishlist'))
+    {
+      getWishlistMoviesEvent();
+    } else if (classList.contains('watched'))
+    {
+      getWatchedMoviesEvent();
+    } else
+    {
+      getAllMoviesEvent();
+    }
+  });
+};
+
 const initializer = () =>
 {
   myLinks();
@@ -130,6 +174,7 @@ const initializer = () =>
   saveMovieToWishListEvent();
   deleteMovieFromFirebase();
   updateMovieEvent();
+  filterEvents();
 };
 
 module.exports =
