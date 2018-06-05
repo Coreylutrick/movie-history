@@ -33,7 +33,7 @@ const pressEnter = () =>
 {
   $(document).keypress((e) =>
   {
-    if (e.key === 'Enter')
+    if (e.key === 'Enter' && !$('#search').hasClass('hide'))
     {
       const searchWords = $('#searchBar').val().replace(' ', '%20');
       tmdb.showResults(searchWords);
@@ -167,6 +167,47 @@ const filterEvents = () =>
   });
 };
 
+const authEvents = () =>
+{
+  $('#signin-btn').click((e) =>
+  {
+    e.preventDefault();
+    const email = $('#inputEmail').val();
+    const pass = $('#inputPassword').val();
+    firebase.auth().signInWithEmailAndPassword(email, pass)
+      .then((user) =>
+      {
+      })
+      .catch((err) =>
+      {
+        const errorMessage = err.message;
+        console.error(errorMessage);
+      });
+  });
+  $('#registerLink').click(() =>
+  {
+    $('#login-form').addClass('hide');
+    $('#registration-form').removeClass('hide');
+  });
+  $('#signin-link').click((e) =>
+  {
+    $('#login-form').removeClass('hide');
+    $('#registration-form').addClass('hide');
+  });
+  $('#logout').click(() =>
+  {
+    firebase.auth().signOut().then(function () {
+      $('#auth').removeClass('hide');
+      $('#authScreen').removeClass('hide');
+      $('#search').addClass('hide');
+      $('#myMovies').addClass('hide');
+      $('#movie, #srch, #logout').addClass('hide');
+    }).catch(function (error) {
+      console.error(error);
+    });
+  });
+};
+
 const initializer = () =>
 {
   myLinks();
@@ -175,9 +216,11 @@ const initializer = () =>
   deleteMovieFromFirebase();
   updateMovieEvent();
   filterEvents();
+  authEvents();
 };
 
 module.exports =
 {
   initializer,
+  getAllMoviesEvent,
 };

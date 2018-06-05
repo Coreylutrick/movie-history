@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="/styles/style.css">
 </head>
-<body class='text-center'>
+<body>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -23,23 +23,24 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" id='auth'>Authenticate</a></li>
-        <li><a href="#" id='movie'>My Movies</a></li>
-        <li><a href="#" id='srch'>Search</a></li>
+        <li><a href="#" id='movie' class='hide'>My Movies</a></li>
+        <li><a href="#" id='srch' class='hide'>Search</a></li>
+        <li><a href="#" id='logout' class='hide'>Log Out</a></li>
       </ul>
     </div>
   </div>
 </nav>
 <div id='myMovies' class='hide'>
-  <h1>My Movies</h1>
-  <div id='filterButtons'>
+  <h1 class='text-center'>My Movies</h1>
+  <div class='text-center' id='filterButtons'>
     <button class='btn btn-danger wishlist'>Show Wish List Movies</button>
     <button class='btn btn-info watched'>Show Watched Movies</button>
     <button class='btn btn-warning all'>Show All Movies</button>
   </div>
   <div id='savedMovies'></div>
 </div>
-<div id='search'>
-  <h1>Search</h1>
+<div id='search' class='hide'>
+  <h1 class='text-center'>Search</h1>
   <div class="text-center" id="search">
     <div class="input-group input-group-lg col-xs-6 col-xs-offset-3">
       <span class="input-group-addon glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -48,10 +49,61 @@
   </div>
   <div id='movies'></div>
 </div>
-<div id='authScreen' class='hide'>
-  <h1>Sign In</h1>
-  <button>Login with Google</button>
-</div>
+<div id='authScreen' class=''>
+  <div id='login-form'>
+      <h1 class='text-center'>Sign In</h1>
+  <form class="form-horizontal col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+    <div class="form-group">
+      <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <a href='#' id='registerLink'>Need to Register?</a>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" id='signin-btn' class="btn btn-default">Sign in</button>
+      </div>
+    </div>
+  </form>
+  </div>
+<div id='registration-form' class='hide'>
+    <h1 class='text-center'>Registration</h1>
+    <form class="form-horizontal col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+      <div class="form-group">
+        <label for="registerEmail" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+          <input type="email" class="form-control" id="registerEmail" placeholder="Email">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="registerPassword" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+          <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <a href='#' id='signin-link'>Go to Login</a>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" id='register-btn' class="btn btn-default">Register</button>
+        </div>
+      </div>
+    </form>
+    </div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
